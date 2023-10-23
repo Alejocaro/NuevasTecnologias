@@ -1,0 +1,55 @@
+PROFE BUENAS, COMO NO TENGO PYTHON INSTALADO EN EL PC, DECIDI HACELO AQUI, PERO BASICAMENTE
+LO HARIA ASI.
+
+
+class Producto:
+    def __init__(self, producto_id, nombre, descripcion, costo, cantidad, margen_venta):
+        self.producto_id = producto_id
+        self.nombre = nombre
+        self.descripcion = descripcion
+        self.costo = costo
+        self.cantidad = cantidad
+        self.margen_venta = margen_venta
+        self.precio_venta = None
+
+    def asignar_precio_venta(self, callback):
+        if callback:
+            self.precio_venta = callback(self.costo, self.margen_venta)
+
+
+
+class RegistroProductos:
+    def __init__(self):
+        self.productos = {}
+
+    def registrar_producto(self, producto):
+        self.productos[producto.producto_id] = producto
+
+    def imprimir_listado_productos(self):
+        for producto_id, producto in self.productos.items():
+            print(f"ID: {producto_id}, Nombre: {producto.nombre}, Precio de Venta: {producto.precio_venta}")
+
+
+from producto import Producto
+from registro_productos import RegistroProductos
+
+#callback para calcular el precio de venta
+def calcular_precio_de_venta(costo, margen_venta):
+    return costo / (1 - margen_de_venta)
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    registro = RegistroProductos()
+    
+    producto1 = Producto(1, "Producto 1", "Descripción 1", 50000, 10000, 0.2)
+    producto1.asignar_precio_venta(calcular_precio_de_venta)
+    registro.registrar_producto(producto1)
+
+    producto2 = Producto(2, "Producto 2", "Descripción 2", 150000, 30000, 0.25)
+    producto2.asignar_precio_venta(calcular_precio_de_venta)
+    registro.registrar_producto(producto2)
+
+    registro.imprimir_listado_productos()
+
+
+
